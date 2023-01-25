@@ -10,6 +10,12 @@ export function Formulario({ pacientes, setPacientes }) {
 
   const [error, setError] = useState(false);
 
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Enviando Formulario");
@@ -22,12 +28,14 @@ export function Formulario({ pacientes, setPacientes }) {
     }
     setError(false);
 
+    // Objecto de Paciente
     const objectoPaciente = {
       nombre,
       propietario,
       email,
       fecha,
       sintomas,
+      id: generarId(),
     };
     setPacientes([...pacientes, objectoPaciente]);
   };
@@ -59,7 +67,7 @@ export function Formulario({ pacientes, setPacientes }) {
               type="text"
               name=""
               placeholder="Nombre de la Mascota"
-              className="border-2 w-full mt-2 p-2 placeholder-gray-400 rounded-md"
+              className="border-2 w-full mt-2 p-2 placeholder-gray-500 rounded-md"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
@@ -76,7 +84,7 @@ export function Formulario({ pacientes, setPacientes }) {
               type="text"
               name=""
               placeholder="Nombre de Propietario"
-              className="border-2 w-full mt-2 p-2 placeholder-gray-400 rounded-md"
+              className="border-2 w-full mt-2 p-2 placeholder-gray-500 rounded-md"
               value={propietario}
               onChange={(e) => setPropietario(e.target.value)}
             />
@@ -93,7 +101,7 @@ export function Formulario({ pacientes, setPacientes }) {
               type="email"
               name=""
               placeholder="Email"
-              className="border-2 w-full mt-2 p-2 placeholder-gray-400 rounded-md"
+              className="border-2 w-full mt-2 p-2 placeholder-gray-500 rounded-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -109,7 +117,7 @@ export function Formulario({ pacientes, setPacientes }) {
               id="alta"
               type="date"
               name=""
-              className="border-2 w-full mt-2 p-2 placeholder-gray-400 rounded-md"
+              className="border-2 w-full mt-2 p-2 placeholder-gray-500 rounded-md"
               value={fecha}
               onChange={(e) => setFecha(e.target.value)}
             />
@@ -124,7 +132,7 @@ export function Formulario({ pacientes, setPacientes }) {
             <textarea
               id="sintomas"
               name=""
-              className="border-2 w-full mt-2 p-2 placeholder-gray-400 rounded-md"
+              className="border-2 w-full mt-2 p-2 placeholder-gray-500 rounded-md"
               placeholder="Describe los Síntomas"
               value={sintomas}
               onChange={(e) => setSintomas(e.target.value)}
